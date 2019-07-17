@@ -1,0 +1,24 @@
+﻿@model BasicMVCWebsite.ViewModels.Forecast
+@{
+    ViewData["Title"] = "Index";
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+
+
+
+<body class="body-content">
+
+    @foreach (var dailyWeather in Model.SixteenDayForecast)
+    {
+        <a asp-controller="Forecast" asp-action="detailedForecast" asp-route-id="@dailyWeather.id" style="text-decoration:none">
+            <div class="btn btn-primary btn-lg btn-block">
+                <h2>@dailyWeather.currentTime</h2>
+                <h3> @dailyWeather.Summary</h3>
+                <h4>High: @dailyWeather.TemperatureHigh  Low: @dailyWeather.TemperatureLow </h4>
+            </div>
+            </a>
+            }
+    </body>

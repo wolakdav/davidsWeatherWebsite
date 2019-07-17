@@ -1,0 +1,19 @@
+﻿@model weather
+@{
+    ViewData["Title"] = "detailedForecast";
+}
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+
+<body class="body-content">
+    <h2>Detailed Forecast for @Model.currentTime</h2>
+    <h3>The high will be @Model.TemperatureHigh at @Model.TemperatureHighTime with a low of @Model.TemperatureLow occuring at @Model.TemperatureMinTime</h3>
+    <h3>The chances for @Model.PrecipType are @Model.PrecipProbability %</h3>
+    <h3>The max wind speed with be @Model.WindSpeed blowing in a direction of @Model.WindBearing around @Model.WindGustTime</h3>
+    <h3>The overall weather will be @Model.Summary</h3>
+
+</body>
+
