@@ -30,7 +30,7 @@ namespace BasicMVCWebsite.Controllers
         public IActionResult ChangeCity(string input)
         {
             var weather = new weather();
-            var locationService = new GoogleLocationService("AIzaSyDt0Pu9RDpmvBla4hsY5Fqm5IFEZx1kGF4");
+            var locationService = new GoogleLocationService("GOOGLEKEY");
             try
             {
                 var point = locationService.GetLatLongFromAddress(input);
