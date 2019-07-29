@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "9fd0c72fbb5691a2c9c3b5fdc9ab3da87b22f826"
+    "signature": "c04290aaa355519001053b69250e05d52ed36118"
   },
   "compilationOptions": {
     "defines": [
@@ -25,6 +25,7 @@
       "BasicMVCWebsite/1.0.0": {
         "dependencies": {
           "FreeGeoIPCore": "1.0.3",
+          "GoogleMaps.LocationServices": "1.2.0.2",
           "MetOfficeDataPoint": "2.0.0",
           "Microsoft.AspNetCore.App": "2.2.0",
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
@@ -60,6 +61,17 @@
         },
         "compile": {
           "lib/netstandard1.6/FreeGeoIPCore.dll": {}
+        }
+      },
+      "GoogleMaps.LocationServices/1.2.0.2": {
+        "runtime": {
+          "lib/netcoreapp2.1/GoogleMaps.LocationServices.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp2.1/GoogleMaps.LocationServices.dll": {}
         }
       },
       "jQuery/3.0.0": {},
@@ -3605,6 +3617,13 @@
       "sha512": "sha512-A6eOskUtz+MJFLBINxnlEUcb4FZAlMx6dCtttvjlmTDlgA6twbiTPRrEvK6tjTkK2Gvx+ILXH+dVBMHWQ9crwg==",
       "path": "freegeoipcore/1.0.3",
       "hashPath": "freegeoipcore.1.0.3.nupkg.sha512"
+    },
+    "GoogleMaps.LocationServices/1.2.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2G37svPRFSFJCF3Q+tn7cvv0OcuDkJ+mAF10tit4XJL1ToCFa/BzL0c5jCS28RtMhG92qOOS8fymLFofUENyoA==",
+      "path": "googlemaps.locationservices/1.2.0.2",
+      "hashPath": "googlemaps.locationservices.1.2.0.2.nupkg.sha512"
     },
     "jQuery/3.0.0": {
       "type": "package",

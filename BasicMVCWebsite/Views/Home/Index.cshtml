@@ -10,8 +10,8 @@
 
 <div class="body-content">
 
+    <h1> @Model.city</h1>
     <h2 class="body">The current weather is @Model.Summary with a temperature of @Model.temperature</h2>
     <h2> Todays high will be @Model.TemperatureHigh  with a low of @Model.TemperatureLow </h2>
-    <h5>Last updated(UTC): @Model.currentTime</h5>
     <a asp-controller="Home" asp-action="Index" class="navbar-brand"><button class="btn btn-info">Update</button></a>
 </div>

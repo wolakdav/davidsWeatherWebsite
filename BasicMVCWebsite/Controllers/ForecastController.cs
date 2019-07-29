@@ -71,9 +71,10 @@ namespace BasicMVCWebsite.Controllers
                 }
                     weather.Summary = (string)dayForecast["summary"];
                     weather.currentTime = GetDateFromUnixTimestamp((double)dayForecast["time"]).ToString();
-                weather.id = 0;
+                weather.id = id;
                 id++;
-                    forecast.Add(weather);
+                weather.Icon = "/images/" + weather.Icon + ".svg";
+                forecast.Add(weather);
             }
             return forecast;
         }

@@ -16,6 +16,11 @@ namespace BasicMVCWebsite.Models
             city = "Portland";
         }
 
+        public weather(string name)
+        {
+            city = name;
+        }
+
         public weather(JToken dayForecast)
         {
             city = "Portland";

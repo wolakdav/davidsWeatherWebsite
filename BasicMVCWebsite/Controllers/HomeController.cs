@@ -6,6 +6,7 @@ using BasicMVCWebsite.Models;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http;
+using GoogleMaps.LocationServices;
 
 namespace BasicMVCWebsite.Controllers
 {
@@ -15,62 +16,63 @@ namespace BasicMVCWebsite.Controllers
         static HttpClient client = new HttpClient();
         private ITemperatureUnit temperature;
         private ICity city;
-        private string LAT = "45";
-        private string LON = "-122";
+
         public HomeController(ITemperatureUnit temperatureUnit,ICity _city)
         {
             temperature = temperatureUnit;
             city = _city;
-            city.Lat = "-122";
-            city.Lon = "45";
+            if(city.Lat.Equals("0") && city.Lon.Equals("0"))
+            {
+                city.setDefault();
+            }
         }
 
-        public async Task<IActionResult> ChangeCityAsync(string input)
+        public IActionResult ChangeCity(string input)
         {
-            string[] Lat_Lon = input.Split();
-            city.Lat = Lat_Lon[0];
-            city.Lon = Lat_Lon[1];
             var weather = new weather();
-            weather.city = input;
-            await GetWeatherAsync(weather);
-            return View("Index",weather);
+            var locationService = new GoogleLocationService("AIzaSyDt0Pu9RDpmvBla4hsY5Fqm5IFEZx1kGF4");
+            try
+            {
+                var point = locationService.GetLatLongFromAddress(input);
+                city.Lon = point.Latitude.ToString();
+                city.Lat = point.Longitude.ToString();
+                city.City = input + "(" + city.Lon + " , " + city.Lat + ")"; ;
+
+            }
+            catch (Exception e)
+            {
+                weather.currentTime = weather.FormateDate(DateTimeOffset.UtcNow.TimeOfDay);
+                city.setDefault();
+            }
+            return RedirectToAction("Index", "Home");
         }
         public async Task<IActionResult> Index()
         {
-            var view = new weather();
-            view.currentTime = view.FormateDate(DateTimeOffset.UtcNow.TimeOfDay);
-            await GetWeatherAsync(view);
-            return View(view);
+            var weather= new weather();
+            weather.currentTime = weather.FormateDate(DateTimeOffset.UtcNow.TimeOfDay);
+            await GetWeatherAsync(weather);
+            weather.city = city.City;
+            return View(weather);
         }
         [HttpPost]
         public async Task<IActionResult> toggleFahrenheit()
         {
             temperature.toggleFahrenheit();
-             var weather = new weather();
-             weather.currentTime = weather.FormateDate(DateTimeOffset.UtcNow.TimeOfDay);
-             await GetWeatherAsync(weather);
-             return View("Index", weather);
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
         public async Task<IActionResult> toggleCelsius()
         {
             temperature.toggleCelsius();
-            var weather = new weather();
-            weather.currentTime = weather.FormateDate(DateTimeOffset.UtcNow.TimeOfDay);
-            await GetWeatherAsync(weather);
-            return View("Index", weather);
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
         public async Task<IActionResult> toggleUnit()
         {
             temperature.toggleTemperatureUnit();
-            ViewBag.otherUnit = "C";
-            var weather = new weather();
-            weather.currentTime = weather.FormateDate(DateTimeOffset.UtcNow.TimeOfDay);
-            await GetWeatherAsync(weather);
-            return View("Index", weather);
+            return RedirectToAction("Index", "Home");
         }
 
 

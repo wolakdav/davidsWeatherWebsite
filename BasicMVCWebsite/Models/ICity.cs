@@ -9,5 +9,7 @@ namespace BasicMVCWebsite.Models
     {
                  string Lat { get; set; }
                  string Lon { get; set; }
+                    string City { get; set; }
+        void setDefault();
     }
 }
